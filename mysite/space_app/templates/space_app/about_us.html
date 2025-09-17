@@ -1,0 +1,194 @@
+{% extends 'space_app/base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="bg-gray-900 text-white min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl lg:text-5xl font-bold text-center mb-12 font-orbitron text-cyan-400">Meet the Team</h1>
+
+    <!-- Leadership Section -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold text-center mb-8 font-orbitron">Leadership</h2>
+      <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col md:flex-row items-center">
+        <img class="w-40 h-40 rounded-full md:mr-8 mb-4 md:mb-0 border-4 border-cyan-400" src="{% static 'space_app/images/person1.jpg' %}" alt="Muhamed Ibrahim">
+        <div class="text-center md:text-left">
+          <h3 class="font-bold text-2xl text-white">Muhamed Ibrahim</h3>
+          <p class="text-lg text-cyan-400">Local Lead</p>
+          <p class="mt-2 text-gray-300">
+            As the Local Lead for the NASA International Space Apps Challenge in Port Said, Muhamed orchestrates the hackathon, bringing together coders, scientists, designers, and enthusiasts to solve real-world problems using NASA's open data.
+          </p>
+          <a href="https://www.spaceappschallenge.org/2025/local-events/port-said/" target="_blank" class="inline-block mt-4 text-blue-400 hover:text-blue-300 transition-colors duration-300">
+            Visit the Official NASA Event Page &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 max-w-6xl mx-auto">
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <h3 class="font-bold text-xl">Yousef Ibrahim Hassan</h3>
+          <p class="text-md text-gray-400">Vice Lead (Finance & Budget)</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <h3 class="font-bold text-xl">Amr Mohammed Zain</h3>
+          <p class="text-md text-gray-400">Vice Lead (Venue & Logistics)</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+          <h3 class="font-bold text-xl">Muhammad Thabet</h3>
+          <p class="text-md text-gray-400">Vice Lead (Official Rep – P&S)</p>
+        </div>
+      </div>
+       <div class="max-w-sm mx-auto bg-gray-800 rounded-lg shadow-lg p-6 text-center mt-8">
+          <h3 class="font-bold text-xl">Mohamed Mahmoud El-Desoky</h3>
+          <p class="text-md text-gray-400">LOT Coordinator</p>
+        </div>
+    </section>
+
+    <!-- Committees Section -->
+    <h2 class="text-3xl font-bold text-center mb-10 font-orbitron">Committees</h2>
+
+    <div class="space-y-12">
+      <!-- CP Committee -->
+      <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div class="flex items-center mb-6">
+          <div>
+            <h3 class="font-bold text-2xl text-white">Momen Montaser Ahmed</h3>
+            <p class="text-lg text-cyan-400">CP Committee Head</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Awareness</h4>
+            <div class="flex items-center mb-2"><div class="text-sm"><div class="font-semibold">Habiba Hisham Mustafa</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div class="text-sm"><div class="font-semibold">Ayatullah Elsayed Abdo</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Marketing</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Shaza Mohamed Saleh</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Malak Ehab El-Sayed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Public Relations</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Shaimaa Mohamed Hassan</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Heba Saber Kamel</div><div class="text-gray-400">1st Vice</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Nour Mohamed Mohamed</div><div class="text-gray-400">2nd Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Media Production</h4>
+            <div class="flex items-center"><div><div class="font-semibold">Sara Mohamed Elgazwy</div><div class="text-gray-400">Head</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OP Committee -->
+      <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div class="flex items-center mb-6">
+          <div>
+            <h3 class="font-bold text-2xl text-white">Shahd Ayad</h3>
+            <p class="text-lg text-cyan-400">OP Committee Head</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Organizing</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Rovan Mostafaa El-Sayed</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Reem Kamal Mahmoud</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Logistics</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Abdelrahman Amr Saber</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Menna-Tullah Eldesoky</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Registration</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Nada Mahmoud Abdelhafeez</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Mariam Mohamed Ahmed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Safety</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Salma Khaled Mahmoud</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Mahmoud Hany Ahmed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+        </div>
+      </section>
+
+       <!-- EI Committee -->
+      <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div class="flex items-center mb-6">
+          <div>
+            <h3 class="font-bold text-2xl text-white">Mariam Muhammad Soliman</h3>
+            <p class="text-lg text-cyan-400">EI Committee Head</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">GPE</h4>
+            <div class="flex items-center"><div><div class="font-semibold">Sweem Ahmed Mousa</div><div class="text-gray-400">Head</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Entertainment</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Retal Amro Fawzy</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Retaj Nageep Mohamed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Human Resources (HR)</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Nour Tamer Sakr</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Hana Magdy Tawfik</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LD Committee -->
+      <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div class="flex items-center mb-6">
+          <div>
+            <h3 class="font-bold text-2xl text-white">Eslam Ahmed Ezz-Eldin</h3>
+            <p class="text-lg text-cyan-400">LD Committee Head</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Training</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Hala Ismael Hosny</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Rana Wael Mohamed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Mentoring</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Ahmed Amr Ahmed</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Rana Mohamed Helmy</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Judging</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Mazen Mohamed Albadawy</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Ola Mohamed Ali</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TP Committee -->
+      <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div class="flex items-center mb-6">
+          <div>
+            <h3 class="font-bold text-2xl text-white">Ahmed Abdelkader El-Gendy</h3>
+            <p class="text-lg text-cyan-400">TP Committee Head</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Technical</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Elsayed Adel Rezkallah</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Abdelrahman Samy Elatroush</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+          <div class="bg-gray-700 p-4 rounded-md">
+            <h4 class="font-bold text-lg mb-2 text-gray-200">Web Development</h4>
+            <div class="flex items-center mb-2"><div><div class="font-semibold">Marwan Mohamed Farouk</div><div class="text-gray-400">Head</div></div></div>
+            <div class="flex items-center"><div><div class="font-semibold">Samaa Mohamed Saeed</div><div class="text-gray-400">Vice</div></div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% for user in users %}
+    <tr>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{{ user.full_name }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ user.email }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+            {% if user.is_admin %} Admin
+            {% elif user.is_GPE %} GPE
+            {% elif user.is_Mentor %} Mentor
+            {% elif user.is_Registration %} Registration
+            {% elif user.is_moderator %} Moderator
+            {% else %} User {% endif %}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+            {% if user.teams.all %} Yes
+            {% else %} No {% endif %}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <a href="{% url 'user_detail' user.id %}" class="text-green-400 hover:underline">View</a>
+            {% if request.user.is_admin %}
+                <a href="{% url 'edit_user' user.id %}" class="text-blue-400 hover:underline ml-4">Edit</a>
+                <form action="{% url 'delete_user' user.id %}" method="post" class="inline ml-4">
+                    {% csrf_token %}
+                    <button type="submit" class="text-red-400 hover:underline" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                </form>
+            {% endif %}
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-400">No users found.</td>
+    </tr>
+{% endfor %}

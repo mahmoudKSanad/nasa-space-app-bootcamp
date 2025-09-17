@@ -1,0 +1,78 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold font-orbitron mb-8">Welcome, {{ user.full_name }}!</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Profile Section -->
+        <div class="md:col-span-1">
+            <div class="card p-6">
+                <h2 class="text-2xl font-bold font-orbitron mb-4">Profile</h2>
+                <div class="flex items-center mb-4">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="Your avatar" class="w-20 h-20 rounded-full mr-4">
+                    {% endif %}
+                    <div>
+                        <p class="text-xl font-bold">{{ user.full_name }}</p>
+                        <p class="text-gray-400">{{ user.professional_title }}</p>
+                        <p class="text-gray-500">{{ user.organization }}</p>
+                    </div>
+                </div>
+                <a href="{% url 'edit_profile' %}" class="w-full text-center bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- Team Information -->
+        <div class="md:col-span-2">
+            <div class="card p-6">
+                <h2 class="text-2xl font-bold font-orbitron mb-4">Your Team</h2>
+                {% if team %}
+                    <div class="flex items-center mb-4">
+                        {% if team.team_photo %}
+                            <img src="{{ team.team_photo.url }}" alt="{{ team.name }} photo" class="w-20 h-20 rounded-full mr-4">
+                        {% endif %}
+                        <div>
+                            <h3 class="text-2xl font-bold">{{ team.name }}</h3>
+                            <p class="text-gray-400 font-semibold">{{ team.challenge }}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        <span class="font-bold">Status:</span> 
+                        <span class="px-2 py-1 text-sm rounded-full {{ team.looking_for_members|yesno:'bg-green-200 text-green-800,bg-blue-200 text-blue-800' }}">
+                            {{ team.looking_for_members|yesno:"Looking for members,Team full" }}
+                        </span>
+                    </p>
+                    <div class="flex space-x-4">
+                         <a href="{% url 'team_detail' team.id %}" class="w-full text-center bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">View Team</a>
+                         <a href="{% url 'leave_team' team.id %}" class="w-full text-center bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors">Leave Team</a>
+                    </div>
+                {% else %}
+                    <p class="text-gray-400 mb-4">You're not part of a team yet. Join or create one to get started!</p>
+                    <div class="flex space-x-4">
+                        <a href="{% url 'create_team' %}" class="w-full text-center bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">Create a Team</a>
+                        <a href="{% url 'teams' %}" class="w-full text-center bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">Join a Team</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Admin/HR Dashboard Links -->
+        <div class="md:col-span-3 mt-8">
+            <div class="card p-6">
+                <h2 class="text-2xl font-bold font-orbitron mb-4">Dashboards</h2>
+                <div class="flex space-x-4">
+                    {% if user.is_admin or user.is_moderator %}
+                        <a href="{% url 'admin_dashboard' %}" class="w-full text-center bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">Admin Dashboard</a>
+                    {% endif %}
+                    {% if user.is_hr %}
+                         <a href="{% url 'hr_dashboard' %}" class="w-full text-center bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 transition-colors">HR Dashboard</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

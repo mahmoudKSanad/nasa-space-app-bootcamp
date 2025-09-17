@@ -1,0 +1,223 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+    <div class="w-full bg-gray-800 rounded-lg shadow-2xl border border-gray-700 md:mt-0 sm:max-w-2xl xl:p-0" style="box-shadow: 0 0 25px 5px rgba(59, 130, 246, 0.2);">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl font-orbitron">
+                Create a New Account
+            </h1>
+            <form class="space-y-4 md:space-y-6" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">Error!</strong>
+                        <span class="block sm:inline">Please correct the errors below.</span>
+                        <ul class="list-disc list-inside">
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="id_first_name" class="block mb-2 text-sm font-medium text-gray-300">First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div>
+                        <label for="id_last_name" class="block mb-2 text-sm font-medium text-gray-300">Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div>
+                        <label for="id_email" class="block mb-2 text-sm font-medium text-gray-300">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div>
+                        <label for="id_password" class="block mb-2 text-sm font-medium text-gray-300">Password</label>
+                        {{ form.password }}
+                    </div>
+                    <div>
+                        <label for="id_confirm_password" class="block mb-2 text-sm font-medium text-gray-300">Confirm Password</label>
+                        {{ form.confirm_password }}
+                    </div>
+                    <div>
+                        <label for="id_avatar" class="block mb-2 text-sm font-medium text-gray-300">Avatar</label>
+                        {{ form.avatar }}
+                    </div>
+                    <div>
+                        <label for="id_national_id" class="block mb-2 text-sm font-medium text-gray-300">National ID</label>
+                        {{ form.national_id }}
+                    </div>
+                    <div>
+                        <label for="id_phone_number" class="block mb-2 text-sm font-medium text-gray-300">Phone Number</label>
+                        {{ form.phone_number }}
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-300">Gender</label>
+                        <div class="flex items-center">
+                            {% for radio in form.gender %}
+                            <div class="flex items-center mr-4">
+                                {{ radio.tag }}
+                                <label for="{{ radio.id_for_label }}" class="ml-2 text-sm font-medium text-gray-300">{{ radio.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="id_age" class="block mb-2 text-sm font-medium text-gray-300">Age</label>
+                        {{ form.age }}
+                    </div>
+                    <div>
+                        <label for="id_language" class="block mb-2 text-sm font-medium text-gray-300">Language</label>
+                        {{ form.language }}
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="id_skills" class="block mb-2 text-lg font-medium text-gray-300">Skills</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {% for skill in form.skills %}
+                            <div class="flex items-center">
+                                {{ skill.tag }}
+                                <label for="{{ skill.id_for_label }}" class="ml-3 text-lg font-medium text-gray-300">{{ skill.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="id_organization" class="block mb-2 text-sm font-medium text-gray-300">Organization</label>
+                        {{ form.organization }}
+                    </div>
+                    <div>
+                        <label for="id_status" class="block mb-2 text-sm font-medium text-gray-300">Status</label>
+                        {{ form.status }}
+                    </div>
+                    <div>
+                        <label for="id_university" class="block mb-2 text-sm font-medium text-gray-300">University</label>
+                        {{ form.university }}
+                    </div>
+                    <div>
+                        <label for="id_study_field" class="block mb-2 text-sm font-medium text-gray-300">Field of Study</label>
+                        {{ form.study_field }}
+                    </div>
+                    <div>
+                        <label for="id_medical_conditions" class="block mb-2 text-sm font-medium text-gray-300">Medical Conditions</label>
+                        {{ form.medical_conditions }}
+                    </div>
+                    <div>
+                        <label for="id_emergency_contact" class="block mb-2 text-sm font-medium text-gray-300">Emergency Contact</label>
+                        {{ form.emergency_contact }}
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="id_description" class="block mb-2 text-sm font-medium text-gray-300">Past experience description (if exists)</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        {{ form.terms_and_conditions }}
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="id_terms_and_conditions" class="text-gray-300">I agree to the <a href="{% url 'privacy_policy' %}" class="text-blue-500 hover:underline">Terms and Conditions</a></label>
+                    </div>
+                </div>
+                <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center glow-on-hover transition-all">CREATE ACCOUNT</button>
+                <p class="text-sm font-light text-gray-400">
+                    Already have an account? <a href="{% url 'login' %}" class="font-medium text-blue-500 hover:underline">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const phoneInput = document.getElementById('id_phone_number');
+        const nidInput = document.getElementById('id_national_id');
+        const ageInput = document.getElementById('id_age');
+        const passwordInput = document.getElementById('id_password');
+
+        const phoneError = createErrorElement('phone_error', 'Phone number must be 11 digits.');
+        const nidError = createErrorElement('nid_error', 'National ID must be 14 digits.');
+        const ageError = createErrorElement('age_error', 'You must be at least 12 years old.');
+        const passwordError = createErrorElement('password_error', 'Password must be at least 8 characters.');
+
+        insertAfter(phoneError, phoneInput);
+        insertAfter(nidError, nidInput);
+        insertAfter(ageError, ageInput);
+        insertAfter(passwordError, passwordInput);
+
+        form.addEventListener('submit', function(event) {
+            const isPhoneValid = validatePhone();
+            const isNidValid = validateNid();
+            const isAgeValid = validateAge();
+            const isPasswordValid = validatePassword();
+
+            if (!isPhoneValid || !isNidValid || !isAgeValid || !isPasswordValid) {
+                event.preventDefault();
+            }
+        });
+
+        phoneInput.addEventListener('input', validatePhone);
+        nidInput.addEventListener('input', validateNid);
+        ageInput.addEventListener('input', validateAge);
+        passwordInput.addEventListener('input', validatePassword);
+
+        function validatePhone() {
+            const value = phoneInput.value;
+            const isValid = /^\d{11}$/.test(value);
+            toggleError(phoneInput, phoneError, isValid);
+            return isValid;
+        }
+
+        function validateNid() {
+            const value = nidInput.value;
+            const isValid = /^\d{14}$/.test(value);
+            toggleError(nidInput, nidError, isValid);
+            return isValid;
+        }
+
+        function validateAge() {
+            const value = parseInt(ageInput.value, 10);
+            const isValid = !isNaN(value) && value >= 12;
+            toggleError(ageInput, ageError, isValid);
+            return isValid;
+        }
+        
+        function validatePassword() {
+            const value = passwordInput.value;
+            const isValid = value.length >= 8;
+            toggleError(passwordInput, passwordError, isValid);
+            return isValid;
+        }
+
+        function createErrorElement(id, message) {
+            const errorElement = document.createElement('p');
+            errorElement.id = id;
+            errorElement.className = 'text-red-500 text-sm mt-1 hidden';
+            errorElement.textContent = message;
+            return errorElement;
+        }
+
+        function insertAfter(newNode, existingNode) {
+            existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+        }
+
+        function toggleError(input, errorElement, isValid) {
+            if (isValid) {
+                input.classList.remove('border-red-500');
+                errorElement.classList.add('hidden');
+            } else {
+                input.classList.add('border-red-500');
+                errorElement.classList.remove('hidden');
+            }
+        }
+    });
+</script>
+{% endblock %}

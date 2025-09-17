@@ -1,0 +1,123 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto card p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold font-orbitron">{{ project.name }}</h1>
+            {% if request.user.is_admin or request.user in project.team.members.all %}
+                <a href="{% url 'edit_project' project.id %}" class="btn btn-secondary">Edit Project</a>
+            {% endif %}
+        </div>
+
+        <!-- Submission Status Checklist -->
+        <div class="mb-8 p-6 rounded-lg bg-gray-800 border border-gray-700">
+            <h2 class="text-2xl font-semibold mb-4 text-white">Submission Checklist</h2>
+            <ul class="space-y-3">
+                <li class="flex items-center text-lg">
+                    {% if project.name and project.description %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Project Details (Name and Description)</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Project Details (Name and Description)</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.video_url %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Video URL</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Video URL</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.project_file %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Project File</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Project File</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.powerpoint_file %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">PowerPoint File</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">PowerPoint File</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.resources_used %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Resources Used</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Resources Used</span>
+                    {% endif %}
+                </li>
+            </ul>
+            <div class="mt-6 text-center">
+                <p class="text-xl font-bold {% if project.submission_status == 'complete' %}text-green-500{% else %}text-yellow-500{% endif %}">
+                    Submission Status: {{ project.get_submission_status_display }}
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Project Details</h2>
+                <p class="mb-4"><strong>Description:</strong><br>{{ project.description }}</p>
+                <p class="mb-4"><strong>Resources Used:</strong><br>{{ project.resources_used }}</p>
+                {% if project.other_notes %}
+                    <p class="mb-4"><strong>Other Notes:</strong><br>{{ project.other_notes }}</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Submission Files</h2>
+                <ul class="space-y-3">
+                    <li>
+                        <strong>Video:</strong> 
+                        {% if project.video_url %}
+                            <a href="{{ project.video_url }}" target="_blank" class="text-blue-400 hover:underline">Watch Video</a>
+                        {% else %}
+                            <span class="text-gray-400">Not submitted</span>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <strong>Project File:</strong> 
+                        {% if project.project_file %}
+                            <a href="{{ project.project_file.url }}" class="text-blue-400 hover:underline">Download Project</a>
+                        {% else %}
+                            <span class="text-gray-400">Not submitted</span>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <strong>PowerPoint:</strong> 
+                        {% if project.powerpoint_file %}
+                            <a href="{{ project.powerpoint_file.url }}" class="text-blue-400 hover:underline">Download Presentation</a>
+                        {% else %}
+                            <span class="text-gray-400">Not submitted</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4">Team Members</h2>
+            <ul class="list-disc list-inside">
+                {% for member in project.team.members.all %}
+                    <li>{{ member.full_name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

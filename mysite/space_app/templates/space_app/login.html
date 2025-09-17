@@ -1,0 +1,37 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+    <div class="w-full bg-gray-800 rounded-lg shadow-2xl border border-gray-700 md:mt-0 sm:max-w-md xl:p-0" style="box-shadow: 0 0 25px 5px rgba(59, 130, 246, 0.2);">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl font-orbitron">
+                Sign in to the Grid
+            </h1>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }} text-red-500"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form class="space-y-4 md:space-y-6" method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="id_email" class="block mb-2 text-sm font-medium text-gray-300">Email</label>
+                    <input type="email" name="email" id="id_email" class="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 input-glow transition-all" placeholder="callsign" required="">
+                </div>
+                <div>
+                    <label for="id_password" class="block mb-2 text-sm font-medium text-gray-300">Password</label>
+                    <input type="password" name="password" id="id_password" placeholder="••••••••" class="bg-gray-700 border border-gray-600 text-white sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 input-glow transition-all" required="">
+                </div>
+                <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center glow-on-hover transition-all">SIGN IN</button>
+                <p class="text-sm font-light text-gray-400">
+                    No account? <a href="{% url 'register' %}" class="font-medium text-blue-500 hover:underline">Create one</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

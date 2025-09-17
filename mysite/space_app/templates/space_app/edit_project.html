@@ -1,0 +1,76 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Edit Project{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto card p-8">
+        <h1 class="text-3xl font-bold font-orbitron mb-6">Edit Project</h1>
+
+        <!-- Submission Status Checklist -->
+        <div class="mb-8 p-6 rounded-lg bg-gray-800 border border-gray-700">
+            <h2 class="text-2xl font-semibold mb-4 text-white">Submission Checklist</h2>
+            <ul class="space-y-3">
+                <li class="flex items-center text-lg">
+                    {% if project.name and project.description %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Project Details (Name and Description)</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Project Details (Name and Description)</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.video_url %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Video URL</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Video URL</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.project_file %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Project File</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Project File</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.powerpoint_file %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">PowerPoint File</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">PowerPoint File</span>
+                    {% endif %}
+                </li>
+                <li class="flex items-center text-lg">
+                    {% if project.resources_used %}
+                        <span class="text-green-500 mr-3">&#10004;</span>
+                        <span class="text-gray-300">Resources Used</span>
+                    {% else %}
+                        <span class="text-red-500 mr-3">&#10008;</span>
+                        <span class="text-gray-400">Resources Used</span>
+                    {% endif %}
+                </li>
+            </ul>
+            <div class="mt-6 text-center">
+                <p class="text-xl font-bold {% if project.submission_status == 'complete' %}text-green-500{% else %}text-yellow-500{% endif %}">
+                    Submission Status: {{ project.get_submission_status_display }}
+                </p>
+            </div>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            {% include 'space_app/partials/project_form.html' %}
+            <div class="flex justify-end pt-6">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

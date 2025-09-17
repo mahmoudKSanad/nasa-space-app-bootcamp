@@ -1,0 +1,188 @@
+{% extends 'space_app/base.html' %}
+{% load static %}
+
+{% block title %}Welcome to the NASA Space Apps Challenge!{% endblock %}
+
+{% block content %}
+<div class="relative text-white overflow-hidden">
+    <!-- Hero Section -->
+    <section class="relative text-center py-20 lg:py-32">
+        <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+        <div class="relative container mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-bold font-orbitron mb-4 animate-fade-in-down">
+                Join the 2025 NASA Space Apps Challenge
+            </h1>
+            <p class="text-lg md:text-xl font-light mb-8 max-w-3xl mx-auto animate-fade-in-up">
+                The largest annual global hackathon is back. Learn, launch, and lead with thousands of others this October 4-10!
+                But first we cant wait to see you in the bootcamp September 16-18.
+            </p>
+            <div class="animate-fade-in flex flex-col sm:flex-row sm:justify-center items-center gap-4">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'register' %}" class="w-full sm:w-auto inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 glow-on-hover">
+                    Register Now
+                </a>
+                {% endif %}
+                <a href="#about" class="w-full sm:w-auto inline-block bg-transparent border-2 border-indigo-400 hover:bg-indigo-500 hover:border-indigo-500 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Countdown Section -->
+    
+    <section id="countdown" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold font-orbitron mb-8">Event Countdown</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                
+                <div x-data="eventTimer(
+                    new Date('2025-09-16T09:00:00+03:00'), 
+                    new Date('2025-09-20T21:00:00+03:00'),
+                    'Bootcamp Starts In',
+                    'Bootcamp Ends In'
+                )" x-init="init()" class="bg-gray-900 p-6 md:p-8 rounded-lg shadow-2xl">
+                    <h3 class="text-2xl font-orbitron mb-4" x-text="title"></h3>
+                    <div class="grid grid-cols-4 gap-2 md:gap-4 text-center">
+                        <div>
+                            <span x-text="days" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Days</span>
+                        </div>
+                        <div>
+                            <span x-text="hours" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Hours</span>
+                        </div>
+                        <div>
+                            <span x-text="minutes" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Mins</span>
+                        </div>
+                        <div>
+                            <span x-text="seconds" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Secs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div x-data="eventTimer(
+                    new Date('2025-09-18T09:00:00+03:00'),
+                    new Date('2025-09-19T21:00:00+03:00'),
+                    'Hackathon Starts In',
+                    'Hackathon Ends In'
+                )" x-init="init()" class="bg-gray-900 p-6 md:p-8 rounded-lg shadow-2xl">
+                    <h3 class="text-2xl font-orbitron mb-4" x-text="title"></h3>
+                    <div class="grid grid-cols-4 gap-2 md:gap-4 text-center">
+                        <div>
+                            <span x-text="days" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Days</span>
+                        </div>
+                        <div>
+                            <span x-text="hours" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Hours</span>
+                        </div>
+                        <div>
+                            <span x-text="minutes" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Mins</span>
+                        </div>
+                        <div>
+                            <span x-text="seconds" class="font-bold text-3xl md:text-4xl"></span>
+                            <span class="text-xs md:text-sm block">Secs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12">
+                <h3 class="text-2xl font-orbitron mb-4">Bootcamp Location</h3>
+                <p class="text-lg text-gray-300">Creativa - ITI Port Said</p>
+                <a href="https://maps.app.goo.gl/hihXE1E8RaqLrq4i8" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                    View on Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- About the Event Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-orbitron">What is the Space Apps Challenge?</h2>
+                <p class="text-indigo-400 mt-2">A Universe of Innovation</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <img src="{% static 'space_app/images/nasa_space_apps_port_said_logo.jpg' %}" alt="NASA Space Apps" class="rounded-lg shadow-2xl shadow-indigo-500/20">
+                </div>
+                <div class="md:w-1/2">
+                    <p class="mb-4 text-gray-300">
+                        The NASA International Space Apps Challenge is a hackathon for coders, scientists, designers, storytellers, makers, builders, technologists, and everyone enthusiastic about space! For one weekend each October, participants from around the world come together to solve challenges submitted by NASA personnel.
+                    </p>
+                    <p class="text-gray-300">
+                        Teams engage with NASA's free and open data to address real-world problems on Earth and in space. It's a unique opportunity to collaborate, create, and make a tangible impact.
+                    </p>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 01-9-9"></path></svg>
+                            <span class="text-gray-300">Collaborate with thousands of participants from around the globe.</span>
+                        </li>
+                        <li class="flex items-start">
+                           <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                           <span class="text-gray-300">Tackle real-world challenges using open data from NASA.</span>
+                        </li>
+                         <li class="flex items-start">
+                            <svg class="w-6 h-6 text-indigo-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            <span class="text-gray-300">Showcase your skills and win recognition from the world's leading space agency.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    function eventTimer(startDate, endDate, startTitle, endTitle) {
+        return {
+            expiry: startDate,
+            title: startTitle,
+            days: '00',
+            hours: '00',
+            minutes: '00',
+            seconds: '00',
+            intervalId: null, // To hold the interval ID
+            init() {
+                this.updateTimer();
+                this.intervalId = setInterval(() => {
+                    this.updateTimer();
+                }, 1000);
+            },
+            updateTimer() {
+                const now = new Date();
+                let diff;
+
+                if (now < startDate) {
+                    this.title = startTitle;
+                    diff = startDate - now;
+                } else if (now < endDate) {
+                    this.title = endTitle;
+                    diff = endDate - now;
+                } else {
+                    this.title = endTitle.replace('Ends', 'Ended');
+                    this.days = '00';
+                    this.hours = '00';
+                    this.minutes = '00';
+                    this.seconds = '00';
+                    clearInterval(this.intervalId); // Stop the timer
+                    return;
+                }
+
+                this.days = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                this.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                this.minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                this.seconds = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
+        }
+    }
+</script>
+
+{% endblock %}

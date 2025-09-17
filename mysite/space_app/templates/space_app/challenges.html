@@ -1,0 +1,76 @@
+{% extends 'space_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center font-orbitron text-blue-400 mb-12">NASA Space Apps Challenges</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for challenge in challenges %}
+        <div class="card p-6 flex flex-col justify-between cursor-pointer" onclick="openModal('modal-{{ challenge.id }}')">
+            <div>
+                <img src="{% static 'space_app/images/'|add:challenge.image %}" alt="{{ challenge.title }}" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h2 class="text-2xl font-bold font-orbitron text-blue-400 mb-3">{{ challenge.title }}</h2>
+                <p class="text-gray-400 mb-2"><strong>Category:</strong> {{ challenge.category }}</p>
+                <p class="text-gray-400 mb-4"><strong>Difficulty:</strong> <span class="px-2 py-1 text-sm rounded-full
+                    {% if challenge.difficulty == 'Hard' %}bg-red-200 text-red-800
+                    {% elif challenge.difficulty == 'Medium' %}bg-yellow-200 text-yellow-800
+                    {% else %}bg-green-200 text-green-800{% endif %}">{{ challenge.difficulty }}</span></p>
+            </div>
+            <div class="mt-4 text-right">
+                <button class="glowing-btn">View Details</button>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="modal-{{ challenge.id }}" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center">
+            <div class="card p-8 rounded-lg max-w-2xl w-full overflow-y-auto max-h-screen">
+                <h2 class="text-3xl font-bold font-orbitron text-blue-400 mb-4">{{ challenge.title }}</h2>
+                <div class="text-gray-300 space-y-4">
+                    {% for section in challenge.parsed_description %}
+                        {% if section.is_card %}
+                            <div class="p-4 border border-gray-600 rounded-lg bg-gray-800 my-4">
+                                <h3 class="text-2xl font-bold text-blue-400 mt-6 mb-3">■ {{ section.title }}</h3>
+                                {% for item in section.content %}
+                                    {% if item.type == 'list' %}
+                                        <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                            <li>{{ item.text }}</li>
+                                        </ul>
+                                    {% elif item.type == 'paragraph' %}
+                                        <p>{{ item.text }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6 mb-3">■ {{ section.title }}</h3>
+                            {% for item in section.content %}
+                                {% if item.type == 'list' %}
+                                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                        <li>{{ item.text }}</li>
+                                    </ul>
+                                {% elif item.type == 'paragraph' %}
+                                    <p>{{ item.text }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg" onclick="closeModal('modal-{{ challenge.id }}')">Close</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function openModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+    document.getElementById(modalId).classList.add('flex');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+    document.getElementById(modalId).classList.remove('flex');
+}
+</script>
+{% endblock %}

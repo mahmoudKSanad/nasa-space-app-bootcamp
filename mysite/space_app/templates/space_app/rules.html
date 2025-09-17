@@ -1,0 +1,64 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Event Rules{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-bold font-orbitron mb-8 text-center">Event Rules</h1>
+
+    <div x-data="{ open: 'rule1' }" class="space-y-4">
+        <!-- Rule 1 -->
+        <div class="bg-gray-800/50 rounded-lg border border-gray-700">
+            <h2>
+                <button type="button" class="flex items-center justify-between w-full p-6 font-medium text-left text-gray-300 hover:bg-gray-700/50" @click="open = open === 'rule1' ? '' : 'rule1'">
+                    <span class="text-xl font-orbitron">1. Team Size & Composition</span>
+                    <svg :class="{ 'rotate-180': open === 'rule1' }" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </h2>
+            <div x-show="open === 'rule1'" x-collapse class="p-6 pt-0 text-gray-400">
+                <p>Teams must consist of 2 to 6 members. All members must be registered for the event. We encourage diverse teams with a mix of skills, including developers, designers, scientists, and storytellers.</p>
+            </div>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="bg-gray-800/50 rounded-lg border border-gray-700">
+            <h2>
+                <button type="button" class="flex items-center justify-between w-full p-6 font-medium text-left text-gray-300 hover:bg-gray-700/50" @click="open = open === 'rule2' ? '' : 'rule2'">
+                    <span class="text-xl font-orbitron">2. Project Exclusivity</span>
+                    <svg :class="{ 'rotate-180': open === 'rule2' }" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </h2>
+            <div x-show="open === 'rule2'" x-collapse class="p-6 pt-0 text-gray-400">
+                <p>All work on the project must be done during the hackathon weekend. You may not use any code that was written before the event began. Use of open-source libraries and frameworks is permitted.</p>
+            </div>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="bg-gray-800/50 rounded-lg border border-gray-700">
+            <h2>
+                <button type="button" class="flex items-center justify-between w-full p-6 font-medium text-left text-gray-300 hover:bg-gray-700/50" @click="open = open === 'rule3' ? '' : 'rule3'">
+                    <span class="text-xl font-orbitron">3. Use of NASA Data</span>
+                    <svg :class="{ 'rotate-180': open === 'rule3' }" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </h2>
+            <div x-show="open === 'rule3'" x-collapse class="p-6 pt-0 text-gray-400">
+                <p>Your project must use at least one dataset from NASA's open data portal. The creative and effective use of this data will be a key judging criterion.</p>
+            </div>
+        </div>
+
+        <!-- Rule 4 -->
+        <div class="bg-gray-800/50 rounded-lg border border-gray-700">
+            <h2>
+                <button type="button" class="flex items-center justify-between w-full p-6 font-medium text-left text-gray-300 hover:bg-gray-700/50" @click="open = open === 'rule4' ? '' : 'rule4'">
+                    <span class="text-xl font-orbitron">4. Code of Conduct</span>
+                    <svg :class="{ 'rotate-180': open === 'rule4' }" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </h2>
+            <div x-show="open === 'rule4'" x-collapse class="p-6 pt-0 text-gray-400">
+                <p>All participants must adhere to the event's Code of Conduct. We are committed to providing a safe, respectful, and inclusive environment for everyone. Any form of harassment or disrespect will not be tolerated.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

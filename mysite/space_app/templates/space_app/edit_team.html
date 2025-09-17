@@ -1,0 +1,33 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto bg-gray-800 rounded-lg shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-white mb-6">Edit Team</h1>
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            <div>
+                <label for="id_name" class="block text-sm font-medium text-gray-300">Team Name</label>
+                {{ form.name }}
+            </div>
+            <div>
+                <label for="id_challenge" class="block text-sm font-medium text-gray-300">Challenge</label>
+                {{ form.challenge }}
+            </div>
+            <div>
+                <label for="id_team_photo" class="block text-sm font-medium text-gray-300">Team Photo</label>
+                {{ form.team_photo }}
+            </div>
+            <div>
+                <label for="id_looking_for_members" class="block text-sm font-medium text-gray-300">Looking for Members</label>
+                {{ form.looking_for_members }}
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

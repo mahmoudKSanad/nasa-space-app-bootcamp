@@ -1,0 +1,14 @@
+{
+    "committees": [
+        {
+            "name": "LD Committee",
+            "head": "Ahmed Amr El Adham",
+            "teams": [
+                {
+                    "name": "Mentoring Team",
+                    "head": "Ahmed Amr El Adham"
+                }
+            ]
+        }
+    ]
+}

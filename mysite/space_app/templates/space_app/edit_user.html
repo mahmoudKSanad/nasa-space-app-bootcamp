@@ -1,0 +1,74 @@
+{% extends 'space_app/base.html' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto card p-8">
+        <h1 class="text-3xl font-bold font-orbitron mb-6">Edit User: {{ user_to_edit.full_name }}</h1>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Display specific fields -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="id_first_name" class="block mb-2 text-sm font-medium text-white">First Name</label>
+                    {{ form.first_name }}
+                </div>
+                <div>
+                    <label for="id_last_name" class="block mb-2 text-sm font-medium text-white">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+            </div>
+
+            <div>
+                <label for="id_email" class="block mb-2 text-sm font-medium text-white">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div>
+                <label for="id_phone_number" class="block mb-2 text-sm font-medium text-white">Phone Number</label>
+                {{ form.phone_number }}
+            </div>
+
+            <!-- Role Selection -->
+            <div>
+                <p class="block mb-2 text-sm font-medium text-white">Role</p>
+                <div class="flex flex-wrap gap-4">
+                    {% for radio in form.role %}
+                        <div class="flex items-center">
+                            {{ radio.tag }}
+                            <label for="{{ radio.id_for_label }}" class="ml-2 text-sm text-gray-300">{{ radio.choice_label }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- In Team Status -->
+            <div>
+                <label for="id_in_team" class="block mb-2 text-sm font-medium text-white">In a Team</label>
+                {{ form.in_team }}
+            </div>
+
+            <!-- Skills -->
+            <div>
+                <label class="block mb-2 text-sm font-medium text-white">Skills</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {% for skill_choice in form.skills %}
+                        <div class="flex items-center">
+                            {{ skill_choice.tag }}
+                            <label for="{{ skill_choice.id_for_label }}" class="ml-2 text-sm text-gray-300">{{ skill_choice.choice_label }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-6">
+                <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mr-4">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
